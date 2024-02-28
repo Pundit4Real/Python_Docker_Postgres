@@ -1,0 +1,45 @@
+# Build the Docker Compose services(image) defined in the docker-compose.yml file
+
+    docker-compose build
+
+# Run a one-off command to create a new Django project named "core" using docker-compose
+
+    docker-compose run --rm app django-admin startproject core .
+
+
+# Run this command to create a new Django app named "home" using docker-compose (optional, if needed again)
+
+    docker-compose run --rm app django-admin startapp home 
+
+# Start up the Docker Compose services
+
+    docker-compose up
+
+# Enter into a running container named "django_app" with an interactive terminal session
+
+    docker exec -it django_cont /bin/ash
+
+#Run Celery Task
+    python manage.py shell
+    from newapp.tasks import add
+    task = add.delay(4,2)
+
+Info:
+    PYTHONUNBUFFERED:
+    setting the non-empty value of PYTHONUNBUFFERED means that the python output is 
+    transmitted directly to the terminal without being buffered and that allows displaying 
+    the application's output in real-time.
+
+# seting up your database
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': '5432',
+    }
+}
+
